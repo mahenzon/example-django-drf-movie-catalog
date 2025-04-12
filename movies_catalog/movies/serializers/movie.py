@@ -12,4 +12,5 @@ class MovieSerializer(serializers.ModelSerializer):
             "description",
             "release_date",
             "duration",
+            "age_rating",
         )
