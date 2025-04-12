@@ -23,6 +23,11 @@ class Movie(models.Model):
         blank=True,
         related_name="movies",
     )
+    genres = models.ManyToManyField(
+        to="Genre",
+        blank=True,
+        related_name="movies",
+    )
 
     class Meta:
         ordering = ("id",)
