@@ -1,3 +1,8 @@
+Этот код на Django + Django REST Framework
+
+Как альтернатива тому, что мы делали на FastAPI-JSON:API в другом репо:
+https://github.com/mahenzon/fastapi-jsonapi-example-movies-catalog
+
 
 ## Таблицы
 
