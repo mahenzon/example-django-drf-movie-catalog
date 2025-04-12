@@ -9,4 +9,7 @@ class AgeRatingDetailSerializer(AgeRatingSerializer):
     )
 
     class Meta(AgeRatingSerializer.Meta):
-        fields = (*AgeRatingSerializer.Meta.fields, "movies")
+        fields = (
+            *AgeRatingSerializer.Meta.fields,
+            "movies",
+        )

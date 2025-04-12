@@ -2,6 +2,7 @@ from rest_framework import serializers
 
 from movies.models import AgeRating
 from movies.serializers.age_rating_base import AgeRatingSerializer
+from movies.serializers.genre_base import GenreSerializer
 from movies.serializers.movie_base import MovieSerializer
 
 
@@ -19,6 +20,13 @@ class MovieDetailSerializerExtended(MovieSerializer):
     age_rating = AgeRatingSerializer(
         many=False,
     )
+    genres = GenreSerializer(
+        many=True,
+        read_only=False,
+    )
 
     class Meta(MovieSerializer.Meta):
-        pass
+        fields = (
+            *MovieSerializer.Meta.fields,
+            "genres",
+        )
