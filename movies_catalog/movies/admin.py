@@ -2,7 +2,7 @@ import textwrap
 
 from django.contrib import admin
 
-from movies.models import AgeRating, Movie
+from movies.models import AgeRating, Genre, Movie
 
 
 @admin.register(Movie)
@@ -30,7 +30,7 @@ class MovieAdmin(admin.ModelAdmin):
     )
 
 
-@admin.register(AgeRating)
+@admin.register(AgeRating, Genre)
 class AgeRatingAdmin(admin.ModelAdmin):
     list_display = (
         "name",
