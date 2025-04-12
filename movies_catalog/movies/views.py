@@ -1,12 +1,31 @@
+from django.db.models import QuerySet
 from rest_framework import viewsets
+from rest_framework.serializers import Serializer
 
 from movies.models import AgeRating, Movie
-from movies.serializers import AgeRatingSerializer, MovieSerializer
+from movies.serializers import (
+    AgeRatingSerializer,
+    MovieDetailSerializerExtended,
+    MovieSerializer,
+    MovieSerializerExtended,
+)
 
 
 class MovieViewSet(viewsets.ModelViewSet):
     queryset = Movie.objects.all()
-    serializer_class = MovieSerializer
+
+    def get_queryset(self) -> QuerySet:
+        qs = self.queryset
+        if self.action == "retrieve":
+            qs = qs.select_related("age_rating")
+        return qs
+
+    def get_serializer_class(self) -> type[Serializer]:
+        if self.request.GET.get("include"):
+            if self.action == "retrieve":
+                return MovieDetailSerializerExtended
+            return MovieSerializerExtended
+        return MovieSerializer
 
 
 class AgeRatingViewSet(viewsets.ModelViewSet):
