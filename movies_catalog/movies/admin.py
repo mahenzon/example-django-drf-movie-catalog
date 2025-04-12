@@ -11,6 +11,7 @@ class MovieAdmin(admin.ModelAdmin):
         "description",
         "release_date",
         "duration",
+        "age_rating",
     )
     list_display_links = (
         "id",
@@ -19,6 +20,7 @@ class MovieAdmin(admin.ModelAdmin):
     list_filter = (
         "title",
         "release_date",
+        "age_rating",
     )
     search_fields = (
         "title",
