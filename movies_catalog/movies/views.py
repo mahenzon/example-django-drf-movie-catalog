@@ -8,7 +8,6 @@ from movies.serializers import (
     AgeRatingSerializer,
     MovieDetailSerializerExtended,
     MovieSerializer,
-    MovieSerializerExtended,
 )
 
 
@@ -23,9 +22,9 @@ class MovieViewSet(viewsets.ModelViewSet):
 
     def get_serializer_class(self) -> type[Serializer]:
         if self.request.GET.get("include"):
-            if self.action == "retrieve":
-                return MovieDetailSerializerExtended
-            return MovieSerializerExtended
+            # if self.action == "retrieve":
+            #     return MovieDetailSerializerExtended
+            return MovieDetailSerializerExtended
         return MovieSerializer
 
 
