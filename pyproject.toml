@@ -66,6 +66,11 @@ indent-width = 4
 # Assume Python 3.13
 target-version = "py313"
 
+extend-exclude = [
+    "movies_catalog/manage.py",
+]
+
+
 [tool.ruff.lint]
 select = [
     "FAST", # FastAPI (FAST)
