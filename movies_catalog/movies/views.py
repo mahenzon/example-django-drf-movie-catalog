@@ -4,6 +4,7 @@ from rest_framework.serializers import Serializer
 
 from movies.models import AgeRating, Movie
 from movies.serializers import (
+    AgeRatingDetailSerializer,
     AgeRatingSerializer,
     MovieDetailSerializerExtended,
     MovieSerializer,
@@ -30,4 +31,14 @@ class MovieViewSet(viewsets.ModelViewSet):
 
 class AgeRatingViewSet(viewsets.ModelViewSet):
     queryset = AgeRating.objects.all()
-    serializer_class = AgeRatingSerializer
+
+    def get_queryset(self) -> QuerySet:
+        qs = self.queryset
+        if self.action == "retrieve":
+            qs = qs.prefetch_related("movies")
+        return qs
+
+    def get_serializer_class(self) -> type[Serializer]:
+        if self.action == "retrieve":
+            return AgeRatingDetailSerializer
+        return AgeRatingSerializer

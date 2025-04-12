@@ -21,6 +21,7 @@ class Movie(models.Model):
         on_delete=models.PROTECT,
         null=True,
         blank=True,
+        related_name="movies",
     )
 
     class Meta:
