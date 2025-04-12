@@ -130,3 +130,10 @@ fixable = ["ALL"]
 unfixable = []
 
 [tool.ruff.lint.extend-per-file-ignores]
+"**/models/__init__.py" = [
+    "PLC0414", # PLC0414 Import alias does not rename original package
+]
+"**/migrations/*.py" = [
+    "RUF012", # RUF012 Mutable class attributes should be annotated with `typing.ClassVar`
+]
+
