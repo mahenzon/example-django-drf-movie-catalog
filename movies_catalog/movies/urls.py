@@ -5,6 +5,7 @@ from movies import views
 
 router = DefaultRouter()
 router.register("movies", views.MovieViewSet)
+router.register("age-ratings", views.AgeRatingViewSet)
 
 app_name = "movies"
 
