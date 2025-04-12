@@ -139,4 +139,8 @@ unfixable = []
 "**/migrations/*.py" = [
     "RUF012", # RUF012 Mutable class attributes should be annotated with `typing.ClassVar`
 ]
-
+"movies_catalog/movies_catalog/settings.py" = [
+    "S105", # S105 Possible hardcoded password assigned to: "SECRET_KEY"
+    "PLW1508", # PLW1508 Invalid type for environment variable default; expected `str` or `None`
+    "E501", # E501 Line too long (91 > 88)
+]
