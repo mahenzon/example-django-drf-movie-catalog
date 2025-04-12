@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     # site packages
+    "rest_framework",
     # my
     "movies.apps.MoviesConfig",
 ]
