@@ -8,21 +8,20 @@ dependencies = [
     "django>=5.2",
     "django-filter>=25.1",
     "djangorestframework>=3.16.0",
-    "markdown>=3.8",
-    "psycopg>=3.2.6",
+    "markdown>=3.10.1",
+    "psycopg[binary]>=3.2.6",
 ]
 
 [dependency-groups]
 dev = [
     "pre-commit>=4.2.0",
-    "psycopg[binary]>=3.2.6",
-    "ruff>=0.11.5",
+    "ruff>=0.14.14",
 ]
 
 # ruff settings
 
 [tool.ruff]
-required-version = ">=0.11.5"
+required-version = ">=0.14.14"
 
 src = [
     "movies_catalog",
