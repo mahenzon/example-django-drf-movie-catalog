@@ -93,6 +93,23 @@ wheels = [
     { url = "https://files.pythonhosted.org/packages/32/d9/502c56fc3ca960075d00956283f1c44e8cafe433dada03f9ed2821f3073b/drf_spectacular-0.29.0-py3-none-any.whl", hash = "sha256:d1ee7c9535d89848affb4427347f7c4a22c5d22530b8842ef133d7b72e19b41a", size = 105433, upload-time = "2025-11-02T03:40:24.823Z" },
 ]
 
+[package.optional-dependencies]
+sidecar = [
+    { name = "drf-spectacular-sidecar" },
+]
+
+[[package]]
+name = "drf-spectacular-sidecar"
+version = "2026.1.1"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "django" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/1e/81/c7b0e3ccbd5a039c4f4fcfecf88391a666ca1406a953886e2f39295b1c90/drf_spectacular_sidecar-2026.1.1.tar.gz", hash = "sha256:6f7c173a8ddbbbdafc7a27e028614b65f07a89ca90f996a432d57460463b56be", size = 2468060, upload-time = "2026-01-01T11:27:12.682Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/db/96/38725edda526f3e9e597f531beeec94b0ef433d9494f06a13b7636eecb6e/drf_spectacular_sidecar-2026.1.1-py3-none-any.whl", hash = "sha256:af8df62f1b594ec280351336d837eaf2402ab25a6bc2a1fad7aee9935821070f", size = 2489520, upload-time = "2026-01-01T11:27:11.056Z" },
+]
+
 [[package]]
 name = "example-drf-movies-catalog"
 version = "0.1.0"
@@ -101,7 +118,7 @@ dependencies = [
     { name = "django" },
     { name = "django-filter" },
     { name = "djangorestframework" },
-    { name = "drf-spectacular" },
+    { name = "drf-spectacular", extra = ["sidecar"] },
     { name = "markdown" },
     { name = "psycopg", extra = ["binary"] },
 ]
@@ -117,7 +134,7 @@ requires-dist = [
     { name = "django", specifier = ">=5.2" },
     { name = "django-filter", specifier = ">=25.1" },
     { name = "djangorestframework", specifier = ">=3.16.0" },
-    { name = "drf-spectacular", specifier = ">=0.29.0" },
+    { name = "drf-spectacular", extras = ["sidecar"], specifier = ">=0.29.0" },
     { name = "markdown", specifier = ">=3.10.1" },
     { name = "psycopg", extras = ["binary"], specifier = ">=3.2.6" },
 ]
