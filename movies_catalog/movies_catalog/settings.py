@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     # site packages
     "rest_framework",
     "drf_spectacular",
+    "drf_spectacular_sidecar",  # required for Django collectstatic discovery
     # my
     "movies.apps.MoviesConfig",
 ]
@@ -143,5 +144,8 @@ SPECTACULAR_SETTINGS = {
     "DESCRIPTION": "DRF + drf-spectacular API example",
     "VERSION": "1.0.0",
     "SERVE_INCLUDE_SCHEMA": False,
+    "SWAGGER_UI_DIST": "SIDECAR",  # shorthand to use the sidecar instead
+    "SWAGGER_UI_FAVICON_HREF": "SIDECAR",
+    "REDOC_DIST": "SIDECAR",
     # OTHER SETTINGS
 }
