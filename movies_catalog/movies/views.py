@@ -28,6 +28,92 @@ INCLUDE_MOVIE_RELATIONS_QUERY_PARAM = OpenApiParameter(
     default="1",
 )
 
+# Reusable inner data structures for Movie response examples
+_MOVIE_BASE_FIELDS = {
+    "title": "Movie Name",
+    "description": "Movie description",
+    "release_date": "2025-09-26",
+    "duration": 95,
+}
+
+_AGE_RATING_R = {
+    "id": 1,
+    "symbol": "R",
+    "description": "Restricted",
+}
+
+_AGE_RATING_PG13 = {
+    "id": 2,
+    "symbol": "PG-13",
+    "description": "Parents Strongly Cautioned",
+}
+
+_GENRES_ACTION_DRAMA = [
+    {"id": 1, "name": "Action"},
+    {"id": 2, "name": "Drama"},
+]
+
+_GENRE_COMEDY = [
+    {"id": 3, "name": "Comedy"},
+]
+
+_MOVIE_WITHOUT_INCLUDE = {
+    "id": 1,
+    **_MOVIE_BASE_FIELDS,
+    "age_rating": "R",
+}
+
+_MOVIE_WITH_INCLUDE = {
+    "id": 1,
+    **_MOVIE_BASE_FIELDS,
+    "age_rating": _AGE_RATING_R,
+    "genres": _GENRES_ACTION_DRAMA,
+}
+
+_MOVIE_ANOTHER_WITHOUT_INCLUDE = {
+    "id": 2,
+    "title": "Another Movie",
+    "description": "Another description",
+    "release_date": "2025-10-15",
+    "duration": 120,
+    "age_rating": "PG-13",
+}
+
+_MOVIE_ANOTHER_WITH_INCLUDE = {
+    "id": 2,
+    "title": "Another Movie",
+    "description": "Another description",
+    "release_date": "2025-10-15",
+    "duration": 120,
+    "age_rating": _AGE_RATING_PG13,
+    "genres": _GENRE_COMEDY,
+}
+
+# Reusable response examples for Movie endpoints
+MOVIE_RESPONSE_WITHOUT_INCLUDE = OpenApiExample(
+    name="Response without include",
+    value=_MOVIE_WITHOUT_INCLUDE,
+    response_only=True,
+)
+
+MOVIE_RESPONSE_WITH_INCLUDE = OpenApiExample(
+    name="Response with include=1",
+    value=_MOVIE_WITH_INCLUDE,
+    response_only=True,
+)
+
+MOVIE_LIST_RESPONSE_WITHOUT_INCLUDE = OpenApiExample(
+    name="List response without include",
+    value=[_MOVIE_WITHOUT_INCLUDE, _MOVIE_ANOTHER_WITHOUT_INCLUDE],
+    response_only=True,
+)
+
+MOVIE_LIST_RESPONSE_WITH_INCLUDE = OpenApiExample(
+    name="List response with include=1",
+    value=[_MOVIE_WITH_INCLUDE, _MOVIE_ANOTHER_WITH_INCLUDE],
+    response_only=True,
+)
+
 
 @extend_schema_view(
     list=extend_schema(
@@ -55,6 +141,16 @@ INCLUDE_MOVIE_RELATIONS_QUERY_PARAM = OpenApiParameter(
         parameters=[
             INCLUDE_MOVIE_RELATIONS_QUERY_PARAM,
         ],
+        responses={
+            status.HTTP_200_OK: OpenApiResponse(
+                response="application/json",
+                description="Movie list (without nested relations)",
+                examples=[
+                    MOVIE_LIST_RESPONSE_WITHOUT_INCLUDE,
+                    MOVIE_LIST_RESPONSE_WITH_INCLUDE,
+                ],
+            ),
+        },
     ),
     create=extend_schema(
         responses={
@@ -112,38 +208,8 @@ INCLUDE_MOVIE_RELATIONS_QUERY_PARAM = OpenApiParameter(
                 response="application/json",
                 description="Movie details (without nested relations)",
                 examples=[
-                    OpenApiExample(
-                        name="Response without include",
-                        value={
-                            "id": 1,
-                            "title": "Movie Name",
-                            "description": "Movie description",
-                            "release_date": "2025-09-26",
-                            "duration": 95,
-                            "age_rating": "R",
-                        },
-                        response_only=True,
-                    ),
-                    OpenApiExample(
-                        name="Response with include=1",
-                        value={
-                            "id": 1,
-                            "title": "Movie Name",
-                            "description": "Movie description",
-                            "release_date": "2025-09-26",
-                            "duration": 95,
-                            "age_rating": {
-                                "id": 1,
-                                "symbol": "R",
-                                "description": "Restricted",
-                            },
-                            "genres": [
-                                {"id": 1, "name": "Action"},
-                                {"id": 2, "name": "Drama"},
-                            ],
-                        },
-                        response_only=True,
-                    ),
+                    MOVIE_RESPONSE_WITHOUT_INCLUDE,
+                    MOVIE_RESPONSE_WITH_INCLUDE,
                 ],
             ),
         },
